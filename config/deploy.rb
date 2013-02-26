@@ -1,11 +1,8 @@
-require 'capistrano-rbenv'
-
 set :application, "hadoop-hacknight-jonrowe"
 set :repository,  "git@github.com:JonRowe/hadoop-hacknight.git"
 set :user, "user"
+set :password, "Password01"
 set :ssh_options, forward_agent: true
-
-set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
 
 set :deploy_via, :remote_cache
 set :scm, :git
@@ -15,8 +12,13 @@ role :hadoop_node, '103.7.164.85'
 
 
 namespace :deploy do
+  task :do do
+    run ENV['command']
+  end
+  after "deploy" do
+    run "cd #{current_path} && bundle install"
+  end
   task :finalize_update do
-    run "cd #{current_path} bundle install"
   end
   task :restart do ; end
 end
