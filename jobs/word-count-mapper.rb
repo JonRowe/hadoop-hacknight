@@ -1,6 +1,6 @@
 def words_from line
   line.chomp
-  line.split.split(/\s+/)
+  line.split(/\s+/)
 end
 
 def acceptable word
@@ -9,6 +9,6 @@ end
 
 ARGF.each do |line|
   for word in words_from(line)
-    puts "#{word}:1" if acceptable word
+    puts "#{word.downcase}:1" if acceptable word
   end
 end
