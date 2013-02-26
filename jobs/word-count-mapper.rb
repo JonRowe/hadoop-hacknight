@@ -1,3 +1,9 @@
+def process line
+  for word in words_from(line)
+    puts "#{word.downcase}\t1" if acceptable word
+  end
+end
+
 def words_from line
   line.chomp
   line.split(/\s+/)
@@ -8,7 +14,9 @@ def acceptable word
 end
 
 ARGF.each do |line|
-  for word in words_from(line)
-    puts "#{word.downcase}:1" if acceptable word
+  if line.is_a? Array
+    line.each { |actual| process line }
+  else
+    process line
   end
 end
