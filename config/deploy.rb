@@ -1,7 +1,7 @@
 set :application, "hadoop-hacknight-jonrowe"
 set :repository,  "git@github.com:JonRowe/hadoop-hacknight.git"
 set :user, "user"
-set :password, "Password01"
+set :password, ENV['password']
 set :ssh_options, forward_agent: true
 
 set :deploy_via, :remote_cache
